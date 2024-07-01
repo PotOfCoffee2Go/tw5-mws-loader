@@ -11,8 +11,13 @@
     "syncserver": "node ./syncserver",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PotOfCoffee2Go/tw5-mws-loader.git"
+  },
   "keywords": [
     "TiddlyWiki",
+    "Multi-Wiki-Server",
     "SQLite"
   ],
   "author": "PotOfCoffee2go",
