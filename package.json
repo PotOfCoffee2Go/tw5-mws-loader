@@ -1,0 +1,20 @@
+{
+  "name": "tw5-mws-loader",
+  "version": "0.1.0",
+  "description": "Loads Multi-Wiki-Server SQLite database from 'server' edition directories",
+  "main": "loader.js",
+  "dependencies": {
+    "tiddlywiki": "file:../TiddlyWiki5"
+  },
+  "scripts": {
+    "start": "node ./loader.js",
+    "syncserver": "node ./syncserver",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "TiddlyWiki",
+    "SQLite"
+  ],
+  "author": "PotOfCoffee2go",
+  "license": "MIT"
+}

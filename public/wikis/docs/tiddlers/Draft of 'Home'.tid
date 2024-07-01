@@ -1,0 +1,39 @@
+caption: Welcome
+created: 20240101193236151
+draft.of: Home
+draft.title: Home
+list: Startup
+modified: 20240630200307009
+mustache: yes
+tags: TableOfContents
+title: Draft of 'Home'
+type: text/vnd.tiddlywiki
+
+!! Welcome
+
+<div style="line-height: 1.1em">
+
+```
+tnr-mws-test
+├─ TiddlyWiki5
+└─ tw5-node-red-beta
+```
+
+</div>
+
+
+<$macrocall $name=".codesample" n="0" lng="cmd" eg="""# Create directory to hold test system
+npm start
+"""/>
+
+<div style="line-height: 1.1em">
+
+```
+./public/wikis
+├── docs
+├── empty
+└── test
+
+```
+
+</div>
