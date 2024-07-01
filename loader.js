@@ -10,7 +10,7 @@ const opts = {
         dir: './public/mws'
     },
     appdir: './public/wikis',
-    expdir: './public/exports'
+    expdir: './public/json'
 };
 
 
@@ -115,7 +115,14 @@ function loadMWS() {
         colour.log(`Copying server edition '${opts.appdir}/${options.recipeName}' to MWS recipe '${options.recipeName}'`,184);
         $tw.mws.store.createBag(options.bagName, options.bagDescription);
         $tw.mws.store.createRecipe(options.recipeName, [options.bagName], options.recipeDescription);
-        $tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath, $tw.config.editionsPath, options.tiddlersPath), options.bagName);
+	var tiddlersFromPath = $tw.loadTiddlersFromPath(options.tiddlersPath);
+	// Save the tiddlers
+	for(const tiddlersFromFile of tiddlersFromPath) {
+		for(const tiddler of tiddlersFromFile.tiddlers) {
+			$tw.mws.store.saveBagTiddler(tiddler,options.bagName,null);
+		}
+	}
+        //$tw.mws.store.saveTiddlersFromPath(path.resolve($tw.boot.corePath, $tw.config.editionsPath, options.tiddlersPath), options.bagName);
         // Enable SSE
         $tw.mws.store.saveBagTiddler(
             { title: '$:/config/multiwikiclient/use-server-sent-events', text: 'yes' }, options.bagName
@@ -130,6 +137,26 @@ function loadMWS() {
             recipeDescription: `From server edition ${editionName}`,
             tiddlersPath: `${opts.appdir}/${editionName}/tiddlers`
         })
+ 	if (fs.existsSync(`${opts.appdir}/${editionName}/plugins`)) {
+            const pluginFolder = `${opts.appdir}/${editionName}/plugins`;
+            var pluginsPublishers = fs
+                .readdirSync(pluginFolder, { withFileTypes: true })
+                .filter(dirent => dirent.isDirectory())
+                .map(dirent => dirent.name);
+
+            pluginsPublishers.forEach(publisher => {
+		colour.log(`Copying plugin '${publisher}' to MWS bag '${publisher}'`,184);
+		$tw.mws.store.createBag(publisher, `${publisher} plugin`);
+		$tw.mws.store.createRecipe(editionName, [editionName,publisher], `From server edition ${editionName}`);
+		var tiddlersFromPath = $tw.loadTiddlersFromPath(`${opts.appdir}/${editionName}/plugins/${publisher}`);
+		// Save the tiddlers
+		for(const tiddlersFromFile of tiddlersFromPath) {
+		    for(const tiddler of tiddlersFromFile.tiddlers) {
+			    $tw.mws.store.saveBagTiddler(tiddler,publisher,null);
+		    }
+		}
+            })
+        }
     })
 }
 
@@ -194,4 +221,3 @@ askRebuildDb()
         }, 200);
     })
 })
-

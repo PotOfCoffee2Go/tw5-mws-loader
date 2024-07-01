@@ -1,0 +1,22 @@
+created: 20240701060007794
+modified: 20240701062919925
+tags: maintab
+title: Install
+
+
+
+
+<$macrocall $name=".codesample" n="0" lng="sh" eg="""mkdir mws-testing
+cd mws-testing
+
+git clone https://github.com/PotOfCoffee2Go/TiddlyWiki5.git --branch multi-wiki-startup
+cd ./TiddlyWiki5
+npm install
+
+cd ..
+
+git clone https://github.com/PotOfCoffee2Go/tw5-mws-loader.git
+cd tw5-mws-loader
+npm install
+npm start
+"""/>

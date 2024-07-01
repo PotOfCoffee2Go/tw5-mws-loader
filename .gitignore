@@ -8,3 +8,6 @@
 
 # TW MultiWikiServer database
 /public/mws/store
+
+# JSON exports
+/public/json

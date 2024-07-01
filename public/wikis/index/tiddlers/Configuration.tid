@@ -1,0 +1,35 @@
+created: 20240701044210510
+modified: 20240701055647145
+tags: maintab
+title: Configuration
+
+The configuration settings are at the very top of the loader.js script. 
+
+> Changing the config requires no experience in JavaScript!
+
+```js
+// Options
+const opts = {
+    mws: {
+        port: '8200',
+        host: '127.0.0.1',
+        dir: './public/mws'
+    },
+    appdir: './public/wikis',
+    expdir: './public/exports'
+};
+
+```
+
+Edit `./loader.js` and will see port, host, and dir settings for Multi-Wiki-Server. The port is 8200 (instead of the default 8080) because it seems Everything! uses 8080 and will probably conflict with some other server - so using port 8200 by default.
+
+host '127.0.0.1' (official address of 'localhost') runs the server on your local machine. Only a browser running on the same computer can access localhost.
+
+<<alert primary src:"http://localhost:8200" class:"border-primary">>
+
+<<image-basic "mws-home-screen.png" caption:"Figure 2. Multi-Wiki-Server Home Page." width:"30%" align:"left" tooltip:" MWS Home Page">>
+
+Normally I copy my 'server' edition wikis into `./public/wikis`. However, if you already have a directory containing your 'server' edition wikis then can change 'appdir' to point to that directory.
+
+> The 'server' edition wikis are NOT updated by tw5-mws-loader. Wikis in that directory are read and loaded into the MWS Database as recipes. Changes done on MWS database to those wikis/recipes do not update the 'server' edition wikis.
+
